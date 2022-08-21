@@ -75,7 +75,7 @@ exports.UpdateAdminUser = async (req, res, next) => {
 
 
 exports.UpdateUser = async (req, res, next) => {
-    console.log("i am here", req.body);
+   
 
     try {
 
@@ -134,10 +134,8 @@ exports.UpdateUser = async (req, res, next) => {
 
 
 exports.GetUser = async (req, res, next) => {
-    console.log("id   ", req.body.id);
     try {
-        user = await User.findById(_id = req.body.id);
-        console.log("users is here2 => ", user);
+        const user = await User.findById(_id = req.body.id);
         return res.status(200).json({
             "user": user,
             "message": "Profile Loaded!"
@@ -151,9 +149,8 @@ exports.GetUser = async (req, res, next) => {
 }
 
 exports.GetAdminUser = async (req, res, next) => {
-    console.log("id", req.params.id);
     try {
-        user = await User.findById(_id = req.params.id);
+        const user = await User.findById(_id = req.params.id);
         return res.status(200).json({
             "user": user,
             "message": "Success"
@@ -168,7 +165,7 @@ exports.GetAdminUser = async (req, res, next) => {
 
 exports.getUsers = async (req, res, next) => {
     try {
-        users = await User.find();
+        const users = await User.find();
         return res.status(200).json({
             "users": users,
             "message": "Success"
@@ -300,7 +297,6 @@ exports.SignUp_verification = async (req, res, next) => {
 exports.ResetPassword = async (req, res, next) => {
     try {
         const email = req.body.email;
-        console.log(email);
         const existingUser = await User.findOne({ email: email });
         if (!existingUser) return res.status(400).send("No email registerd with this email");
         const salt = await bcrypt.genSalt();
@@ -330,7 +326,7 @@ exports.ResetPassword = async (req, res, next) => {
 }
 
 exports.ResetPasswordVerification = async (req, res, next) => {
-    console.log('req ', req.params.id, req.params.token)
+    
     try {
         const user = await User.findOne({ _id: req.params.id });
         if (!user) return res.status(400).json({ error: "Invalid Link" });
@@ -351,7 +347,7 @@ exports.ResetPasswordVerification = async (req, res, next) => {
 }
 
 exports.UpdatePassword = async (req, res, next) => {
-    console.log('req', req.params.id, req.params.token);
+
     console.log(req.body)
     try {
 

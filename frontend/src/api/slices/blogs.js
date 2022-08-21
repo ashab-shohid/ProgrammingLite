@@ -56,8 +56,8 @@ export const retrieveBlogs = createAsyncThunk(
 );
 export const updateBlog = createAsyncThunk(
     "blogss/update",
-    async ({ id, blog }) => {
-        const res = await BlogDataService.update({ id, blog});
+    async ({ id, formData }) => {
+        const res = await BlogDataService.update({ id, formData});
         return res.data;
     }
 );

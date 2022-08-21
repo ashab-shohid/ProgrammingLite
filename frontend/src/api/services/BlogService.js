@@ -20,8 +20,8 @@ const createComment = (data) =>{
 const createReply = (data) =>{
     return http4.post("/createReply", data);
 };
-const update = ({ id, blog}) => {
-    return http.put(`/blogUpdate/${id}`, blog);
+const update = ({ id, formData}) => {
+    return http3.put(`/blogUpdate/${id}`, formData);
 };
 const remove = id => {
     return http.delete(`/blogDelete/${id}`);

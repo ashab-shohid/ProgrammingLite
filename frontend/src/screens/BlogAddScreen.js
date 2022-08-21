@@ -69,7 +69,7 @@ const BlogAddScreen = () =>{
         //  }
 
         dispatch(createBlog(formData));
-         navigate("/blogsListScreen");
+        navigate("/");
 
 
     }

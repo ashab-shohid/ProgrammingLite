@@ -101,7 +101,7 @@ const BlogsListScreen = (props) => {
                                         <hr></hr>
                                         <Button variant="contained"  component={Link} to={`/blogEditScreen/${post._id}`} sx={{ ml: 1 }} color="primary"><EditRoadIcon/></Button>
                                         <hr></hr>
-                                        <Button variant="contained" component={Link} to="/"  sx={{ ml: 1 }} color="secondary"><PreviewIcon/></Button>
+                                        <Button variant="contained" component={Link} to={`/blogDetailScreen/${post._id}`}  sx={{ ml: 1 }} color="secondary"><PreviewIcon/></Button>
                                     </TableCell>
                                 </TableRow>
                             ))}

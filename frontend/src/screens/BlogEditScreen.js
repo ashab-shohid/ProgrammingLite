@@ -43,16 +43,27 @@ const BlogEditScreen = ({ match, history }) => {
     const [author, setAuthor] = React.useState('');
     const [content, setContent] = React.useState('');
     const [blogId, setBlogId] = React.useState('');
+    const [thumbnail, setThumbnail] = React.useState(null);
 
 
 
     const update = async (e) => {
         e.preventDefault();
-        const blog = { category: category, title: title, description: description, tags: tags, author: author, content: content }
-        if (blog) {
-            await dispatch(updateBlog({ id, blog }));
-            navigate('/')
+        if(!category || !title || !description || !tags || !author || !content || !thumbnail)
+        {
+            alert("All fields are not given");
+            return;
         }
+        const formData = new FormData();
+        formData.append("category", category);
+        formData.append("title", title);
+        formData.append("description", description);
+        formData.append("tags", tags);
+        formData.append("author", author);
+        formData.append("content", content);
+        formData.append("thumbnil", thumbnail)
+        dispatch(updateBlog({ id, formData }));
+        navigate('/')
 
 
     }
@@ -75,6 +86,8 @@ const BlogEditScreen = ({ match, history }) => {
             setAuthor(blog.author);
             setContent(blog.content);
             setBlogId(blog._id);
+            setThumbnail(blog.image);
+
         }
     }, [initFetch])
 
@@ -110,6 +123,20 @@ const BlogEditScreen = ({ match, history }) => {
 
                                     <Box sx={{ mt: 2 }}>
                                         <TextField fullWidth id="filled-basic" value={author} label="Author" variant="outlined" size="small" name="author" onChange={(e) => { setAuthor(e.target.value) }} />
+                                    </Box>
+                                    <Box sx={{ mt: 2 }}>
+                                        <img style={{ height: '80px', width: '80px' }} src={`http://localhost:4000/${thumbnail}`}></img>
+                                    </Box>
+                                    <Box sx={{ mt: 2 }}>
+                                        <TextField
+                                            fullWidth
+                                            id="filled-basic"
+                                            type="file"
+                                            variant="outlined"
+                                            accept=".png, .jpg, .jpeg"
+                                            name="thumbnail"
+                                            size="small"
+                                            onChange={(e) => { setThumbnail(e.target.files[0]) }} />
                                     </Box>
 
                                 </Grid>

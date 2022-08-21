@@ -227,7 +227,7 @@ exports.editBlogById = async (request, response, next) => {
     try {
         const post = await Post.findById(_id = request.params.id);
         response.json(post);
-        console.log("Hellow world");
+       
     }
     catch (error) {
 
@@ -240,15 +240,31 @@ exports.updateBlog = async (request, response, next) => {
         const get_blog = request.body;
         // console.log("Id Avatar 2 2 2 2 2 : ",id, blog);
         const { category, title, description, tags, author, content } = get_blog;
-        const blog = new Post({
-            _id: id,
-            category: category,
-            title: title,
-            description: description,
-            tags: tags,
-            author: author,
-            content: content
-        });
+        let blog;
+        if(request.file)
+        {
+            blog = new Post({
+                _id: id,
+                category: category,
+                title: title,
+                description: description,
+                tags: tags,
+                author: author,
+                content: content,
+                image: request.file.filename
+            });
+        }
+        else{
+            blog = new Post({
+                _id: id,
+                category: category,
+                title: title,
+                description: description,
+                tags: tags,
+                author: author,
+                content: content
+            });
+        }
 
         Post.updateOne({ _id: request.params.id }, blog).then(
             () => {

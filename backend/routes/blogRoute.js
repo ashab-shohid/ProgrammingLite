@@ -30,7 +30,7 @@ router.route('/new').post(upload.single('thumbnil'), createBlog);
 router.route('/blogDetails/:id').get(getBlogById);
 router.route('/blogDelete/:id').delete(deleteBlog);
 router.route('/categories').get(categories);
-router.route('/blogUpdate/:id').put(updateBlog);
+router.route('/blogUpdate/:id').put(upload.single('thumbnil'), updateBlog);
 
 
 
